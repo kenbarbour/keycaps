@@ -1,6 +1,6 @@
 // Row 5? Cherry MX key
 //change to round things better
-$fn = 64;
+$fn = 4;
 
 //scale of inner to outer shape
 key_wall_thickness_width =  .8;
@@ -30,7 +30,16 @@ stabilizer_distance = 50;
 inverted_dish = 0;
 
 //keycap type, [0..11]
-key_profile = 0;
+  /*
+   * 0 = DCS Function row
+   * 1 = DCS row 1 (number row)
+   * 2 = DCS row 2 (tab, q, w...)
+   * 3 = DCS row 3 (caps lock, a, s...)
+   * 4 = DCS row 4 (shift, z, x...) and row 5 (ctrl, alt...)
+   */
+key_profile = 1;
+echo("Key Length: ",key_length);
+echo("Key profile: ",key_profile);
 
 //profile specific stuff
 
