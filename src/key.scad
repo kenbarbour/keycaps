@@ -37,7 +37,7 @@ inverted_dish = 0;
    * 3 = DCS row 3 (caps lock, a, s...)
    * 4 = DCS row 4 (shift, z, x...) and row 5 (ctrl, alt...)
    */
-key_profile = 1;
+key_profile = 11;
 echo("Key Length: ",key_length);
 echo("Key profile: ",key_profile);
 
