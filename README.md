@@ -2,7 +2,9 @@
 =============================
 This project is intended to generate some models and gcode for printing Cherry MX compatible keycaps
 
-See Makefile for generating models.
+## Generating models
+Use `make dcs-models` to generate dcs keycaps or `make sa-models` to generate sa keycaps
+Plating and gcode generation is still a work in progress.
 
 ##Improvements
  * key.scad could automatically set stabilizer = 1 if key_length > 1.75 and stabilizer_spacing = 12 (50 if key_length > 6)
