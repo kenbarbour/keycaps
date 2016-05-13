@@ -12,4 +12,4 @@ Plating and gcode generation is still a work in progress.
 ##License
 This software is released under the GNU GPL v3 (http://www.gnu.org/licenses/gpl-3.0.en.html)
  with the exception of
-src/key.scad: Attribution - Non-Commercial - Share Alike (thingiverse.com/thing:468651)
+ * src/key.scad (http://www.thingiverse.com/thing:468651): Attribution - Non-Commercial - Share Alike (http://creativecommons.org/licenses/by-nc-sa/3.0/)   Some small modifications were made.  See `git log src/key.scad` for details
