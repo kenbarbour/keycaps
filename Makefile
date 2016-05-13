@@ -9,5 +9,5 @@ sa:
 sa-models:
 	$(MAKE) --file=make_family.mk FAMILY=sa models
 clean:
-	$(MAKE) --file=dcs_keycaps.mk clean
+	$(MAKE) --file=make_family.mk clean
 

@@ -6,6 +6,7 @@ $fn = 4;
 key_wall_thickness_width =  .8;
 key_wall_thickness_height = .8;
 key_wall_thickness_depth =  .8;
+
 //length in units of key
 key_length = 1;
 
@@ -18,13 +19,17 @@ brim_radius = 11;
 //brim depth
 brim_depth = .3;
 
-
+// whether keycap is mounted vertically (like numpad enter or plus)
+vertical = 0;
 
 //whether stabilizer connectors are enabled
-stabilizers = 0;
+stabilizers = (key_length >= 2) ? 1 : 0;
 
+/*
+ * Stabilizers are typically 12mm from center on most keys except for the spacebar which  is usually 50mm
+ */
 //stabilizer distance
-stabilizer_distance = 50;
+stabilizer_distance = (key_length < 6) ? 12: 50;
 
 // invert dishing. mostly for spacebar
 inverted_dish = 0;
@@ -37,7 +42,7 @@ inverted_dish = 0;
    * 3 = DCS row 3 (caps lock, a, s...)
    * 4 = DCS row 4 (shift, z, x...) and row 5 (ctrl, alt...)
    */
-key_profile = 11;
+key_profile = 0;
 echo("Key Length: ",key_length);
 echo("Key profile: ",key_profile);
 
@@ -380,8 +385,9 @@ module connector(key_profile,has_brim){
 
 //stabilizer connectors 
 module stabilizer_connectors(key_profile,has_brim){
-	translate([stabilizer_distance,0,0]) connector(key_profile, has_brim);
-	translate([-stabilizer_distance,0,0]) connector(key_profile, has_brim);
+    stabilizer_placement = [pow(0,vertical),vertical,0];
+	translate(stabilizer_distance*stabilizer_placement) connector(key_profile, has_brim);
+	translate(-1*stabilizer_distance*stabilizer_placement) connector(key_profile, has_brim);
 }
 
 //i h8 u scad
@@ -422,8 +428,8 @@ module outside(key_profile, thickness){
 
 //super basic hull shape without dish
 module shape_hull(key_profile, thickness, modifier){
-	bottom_key_width = key_profile[0] ;
-	bottom_key_height = key_profile[1];
+	bottom_key_width = key_profile[0] * pow(key_length,pow(0,vertical));
+	bottom_key_height = key_profile[1] * pow(key_length,vertical);
 	top_key_width_difference = key_profile[2];
 	top_key_height_difference = key_profile[3];
 	total_depth = key_profile[4] - thickness;
@@ -431,11 +437,11 @@ module shape_hull(key_profile, thickness, modifier){
 	top_skew = key_profile[6];
 
 	hull(){
-		roundedRect([bottom_key_width*key_length - thickness,bottom_key_height - thickness,.001],1.5);
+		roundedRect([bottom_key_width - thickness,bottom_key_height - thickness,.001],1.5);
 
 		translate([0,top_skew,total_depth * modifier])
 		rotate([-top_tilt,0,0])
-		roundedRect([bottom_key_width*key_length - thickness -top_key_width_difference * modifier,bottom_key_height - thickness -top_key_height_difference * modifier,.001],1.5);
+		roundedRect([bottom_key_width - thickness -top_key_width_difference * modifier,bottom_key_height - thickness -top_key_height_difference * modifier,.001],1.5);
 	}
 }
 //end libraries

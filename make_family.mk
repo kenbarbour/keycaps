@@ -43,6 +43,8 @@ row4: $(BUILDDIR)/key-$(FAMILY)-r4-100u.stl $(BUILDDIR)/key-$(FAMILY)-r4-225u.st
 
 row5: $(BUILDDIR)/key-$(FAMILY)-r5-125u.stl $(BUILDDIR)/key-$(FAMILY)-r5-625u.stl
 
+vertical: $(BUILDDIR)/key-$(FAMILY)-r2-200u-vertical.stl $(BUILDDIR)/key-$(FAMILY)-r4-200u-vertical.stl
+
 $(BUILDDIR):
 	$(MKDIR)
 	
@@ -50,13 +52,16 @@ $(BUILDDIR)/key-$(FAMILY)-r1-100u.stl: $(KEY_DEPS)
 	$C -D key_profile=$(PROFILE_R1) -D key_length=1 $< -o $@
 
 $(BUILDDIR)/key-$(FAMILY)-r1-200u.stl: $(KEY_DEPS)
-	$C -D key_profile=$(PROFILE_R1) -D key_length=2 -D stabilizers=1 -D stabilizer_distance=12 $< -o $@
+	$C -D key_profile=$(PROFILE_R1) -D key_length=2 $< -o $@
 	
 $(BUILDDIR)/key-$(FAMILY)-r2-100u.stl: $(KEY_DEPS)
 	$C -D key_profile=$(PROFILE_R2) -D key_length=1 $< -o $@
 
 $(BUILDDIR)/key-$(FAMILY)-r2-150u.stl: $(KEY_DEPS)
 	$C -D key_profile=$(PROFILE_R2) -D key_length=1.5 $< -o $@
+
+$(BUILDDIR)/key-$(FAMILY)-r2-200u-vertical.stl: $(KEY_DEPS)
+	$C -D key_profile=$(PROFILE_R2) -D key_length=2 -D vertical=1 $< -o $@
 
 $(BUILDDIR)/key-$(FAMILY)-r3-100u.stl: $(KEY_DEPS)
 	$C -D key_profile=$(PROFILE_R3) -D key_length=1 $< -o $@
@@ -65,16 +70,19 @@ $(BUILDDIR)/key-$(FAMILY)-r3-175u.stl: $(KEY_DEPS)
 	$C -D key_profile=$(PROFILE_R3) -D key_length=1.75 $< -o $@
 
 $(BUILDDIR)/key-$(FAMILY)-r3-225u.stl: $(KEY_DEPS)
-	$C -D key_profile=$(PROFILE_R3) -D key_length=2.25 -D stabilizers=1 -D stabilizer_distance=12 $< -o $@
+	$C -D key_profile=$(PROFILE_R3) -D key_length=2.25 $< -o $@
 
 $(BUILDDIR)/key-$(FAMILY)-r4-100u.stl: $(KEY_DEPS)
 	$C -D key_profile=$(PROFILE_R4) -D key_length=1 $< -o $@
 
 $(BUILDDIR)/key-$(FAMILY)-r4-225u.stl: $(KEY_DEPS)
-	$C -D key_profile=$(PROFILE_R4) -D key_length=2.25 -D stabilizers=1 -D stabilizer_distance=12 $< -o $@
+	$C -D key_profile=$(PROFILE_R4) -D key_length=2.25 $< -o $@
 
 $(BUILDDIR)/key-$(FAMILY)-r4-275u.stl: $(KEY_DEPS)
-	$C -D key_profile=$(PROFILE_R4) -D key_length=2.75 -D stabilizers=1 -D stabilizer_distance=12 $< -o $@
+	$C -D key_profile=$(PROFILE_R4) -D key_length=2.75 $< -o $@
+
+$(BUILDDIR)/key-$(FAMILY)-r4-200u-vertical.stl: $(KEY_DEPS)
+	$C -D key_profile=$(PROFILE_R4) -D key_length=2 -D vertical=1 $< -o $@
 
 $(BUILDDIR)/key-$(FAMILY)-r5-125u.stl: $(KEY_DEPS)
 	$C -D key_profile=$(PROFILE_R5) -D key_length=1.25 $< -o $@
